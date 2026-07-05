@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { PrismaBetterSqlite3 } from "@prisma/adapter-better-sqlite3";
+import { PrismaBetterSQLite3 } from "@prisma/adapter-better-sqlite3";
 import path from "path";
 
 const globalForPrisma = global as unknown as {
@@ -13,11 +13,11 @@ const dbPath = path.join(process.cwd(), "dev.db");
 const url = `file:${dbPath}`;
 
 if (process.env.NODE_ENV === "production") {
-  const adapter = new PrismaBetterSqlite3({ url });
+  const adapter = new PrismaBetterSQLite3({ url });
   prismaInstance = new PrismaClient({ adapter });
 } else {
   if (!globalForPrisma.prisma) {
-    const adapter = new PrismaBetterSqlite3({ url });
+    const adapter = new PrismaBetterSQLite3({ url });
     globalForPrisma.prisma = new PrismaClient({ adapter });
   }
   prismaInstance = globalForPrisma.prisma;
