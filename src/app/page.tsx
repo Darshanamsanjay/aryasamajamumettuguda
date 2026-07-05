@@ -6,18 +6,15 @@ import { db } from "@/lib/db";
 import { getGalleryImages } from "@/lib/gallery";
 import HomeGalleryCarousel from "@/components/HomeGalleryCarousel";
 import BookingForm from "@/components/BookingForm";
+import HeroActions from "@/components/HeroActions";
 import {
   MapPin,
   Phone,
   MessageSquare,
   ArrowRight,
   FileText,
-  CheckCircle2,
-  Flame,
-  Flower2,
   Clock,
-  Handshake,
-  Calendar,
+  Flower2,
 } from "lucide-react";
 
 const siteUrl = "https://www.aryasamajamumettuguda.com";
@@ -68,7 +65,7 @@ export default async function Home() {
   return (
     <div className="flex flex-col min-h-screen bg-[#FFFDF9] text-slate-800">
       {/* 1. Hero Section */}
-      <section className="relative min-h-[70vh] lg:min-h-[80vh] flex items-center pt-16 pb-20 md:py-24 overflow-hidden border-b border-maroon-100/40">
+      <section className="relative min-h-[100svh] flex items-center pt-16 pb-28 sm:py-24 overflow-hidden border-b border-maroon-100/40">
 
         {/* Background Video at 100% Opacity (covers full left-to-right) */}
         <div className="absolute inset-0 z-0">
@@ -93,10 +90,10 @@ export default async function Home() {
           <div className="max-w-2xl flex flex-col gap-6 items-center text-center mx-auto md:mx-0">
 
             {/* Top small text / symbol */}
-            <div className="flex items-center gap-3 text-[#4A3524] font-serif">
-              <div className="h-[1px] w-10 bg-[#4A3524]/30"></div>
-              <span className="text-2xl font-bold tracking-widest text-[#4A3524]" style={{ textShadow: '0 2px 4px rgba(60,35,15,0.2)' }}>ॐ</span>
-              <div className="h-[1px] w-10 bg-[#4A3524]/30"></div>
+            <div className="flex items-center gap-3 text-[#D4AF37] font-serif">
+              <div className="h-[1px] w-10 bg-[#D4AF37]/40"></div>
+              <span className="text-2xl font-bold tracking-widest text-[#D4AF37]" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.5)' }}>ॐ</span>
+              <div className="h-[1px] w-10 bg-[#D4AF37]/40"></div>
             </div>
 
             {/* Main Heading & Sub Heading */}
@@ -112,7 +109,7 @@ export default async function Home() {
               <h2
                 className="font-serif text-lg sm:text-2xl font-bold tracking-widest text-[#FFF5DD] uppercase mt-2"
                 style={{
-                  textShadow: '0 2px 8px rgba(255, 255, 255, 0.15)',
+                  textShadow: '0 2px 8px rgba(0, 0, 0, 0.6)',
                   letterSpacing: '0.075em',
                 }}
               >
@@ -120,119 +117,38 @@ export default async function Home() {
               </h2>
             </div>
 
-            {/* Tagline */}
-            <div className="flex flex-col items-center gap-2 max-w-lg">
+            {/* Divider 1 */}
+            <div className="flex items-center gap-3 w-full max-w-md mx-auto mt-2">
+              <div className="h-[1px] flex-grow bg-gradient-to-r from-transparent to-[#D4AF37]/50"></div>
+              <Flower2 className="h-4.5 w-4.5 text-[#D4AF37] shrink-0" />
+              <div className="h-[1px] flex-grow bg-gradient-to-l from-transparent to-[#D4AF37]/50"></div>
+            </div>
+
+            {/* Subtitle Lines */}
+            <div className="flex flex-col gap-1 items-center max-w-xl mx-auto w-full px-4">
               <p
-                className="text-[#5A4030] text-sm sm:text-base md:text-lg font-serif italic font-medium leading-relaxed"
-                style={{ textShadow: '0 1px 2px rgba(255,255,255,0.4)' }}
+                className="text-[#F6E7B0] text-[13px] sm:text-base md:text-lg font-semibold tracking-wide text-center"
+                style={{ textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}
               >
-                Rooted in Vedic Traditions, Committed to Simple, Sacred &amp; Meaningful Marriages.
+                Simple, Legal &amp; Hassle-Free Same-Day Marriages
               </p>
-              <div className="h-0.5 w-16 bg-[#5A4030]/20 mt-1"></div>
+              <p
+                className="text-[#FFF5DD]/90 text-[10px] sm:text-sm font-medium tracking-wide text-center"
+                style={{ textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}
+              >
+                Certified by Pandit Dr. Vishwashrawa Acharya, Sanskrit Ph.D. Priest
+              </p>
             </div>
 
-            {/* Feature Icons Grid (Centered) */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 w-full justify-center mt-2">
-              <div className="flex flex-col items-center gap-2">
-                <div className="h-11 w-11 rounded-full bg-[#5A0F16] flex items-center justify-center text-white shadow-sm shrink-0">
-                  <Flame className="h-5 w-5" />
-                </div>
-                <span className="text-xs font-medium text-[#4A3524] text-center leading-tight">Vedic Rituals</span>
-              </div>
-
-              <div className="flex flex-col items-center gap-2">
-                <div className="h-11 w-11 rounded-full bg-[#5A0F16] flex items-center justify-center text-white shadow-sm shrink-0">
-                  <Flower2 className="h-5 w-5" />
-                </div>
-                <span className="text-xs font-medium text-[#4A3524] text-center leading-tight">Pure &amp; Traditional</span>
-              </div>
-
-              <div className="flex flex-col items-center gap-2">
-                <div className="h-11 w-11 rounded-full bg-[#5A0F16] flex items-center justify-center text-white shadow-sm shrink-0">
-                  <CheckCircle2 className="h-5 w-5" />
-                </div>
-                <span className="text-xs font-medium text-[#4A3524] text-center leading-tight">Simple Process</span>
-              </div>
-
-              <div className="flex flex-col items-center gap-2">
-                <div className="h-11 w-11 rounded-full bg-[#5A0F16] flex items-center justify-center text-white shadow-sm shrink-0">
-                  <Handshake className="h-5 w-5" />
-                </div>
-                <span className="text-xs font-medium text-[#4A3524] text-center leading-tight">Trust &amp; Respect</span>
-              </div>
+            {/* Divider 2 */}
+            <div className="flex items-center gap-3 w-full max-w-md mx-auto">
+              <div className="h-[1px] flex-grow bg-gradient-to-r from-transparent to-[#D4AF37]/50"></div>
+              <Flower2 className="h-4.5 w-4.5 text-[#D4AF37] shrink-0" />
+              <div className="h-[1px] flex-grow bg-gradient-to-l from-transparent to-[#D4AF37]/50"></div>
             </div>
 
-            {/* CTA Buttons (Centered, Premium Pill-shaped layouts) */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-5 w-full mt-6 max-w-4xl mx-auto">
-
-              {/* Call Now */}
-              <a
-                href="tel:+918099333754"
-                className="group flex-1 flex items-center gap-4 px-6 py-3.5 bg-gradient-to-br from-[#5C0D17] to-[#7A1824] hover:from-[#7A1824] hover:to-[#962230] text-white rounded-[22px] shadow-[0_10px_25px_rgba(92,13,23,0.25)] hover:shadow-[0_15px_30px_rgba(92,13,23,0.4)] border border-[#C78A2A]/20 transition-all duration-300 ease-in-out transform hover:-translate-y-1.5 hover:scale-[1.04] relative overflow-hidden"
-              >
-                {/* Glossy highlight top edge */}
-                <div className="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
-                {/* Glass reflections */}
-                <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent pointer-events-none"></div>
-
-                {/* White circular badge with gold outline */}
-                <div className="h-10 w-10 rounded-full bg-white flex items-center justify-center text-[#5C0D17] border border-[#C78A2A]/30 shadow-[0_2px_6px_rgba(0,0,0,0.12)] shrink-0 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-[5deg]">
-                  <Phone className="h-[18px] w-[18px] fill-current" />
-                </div>
-
-                <div className="flex flex-col items-start text-left leading-none">
-                  <span className="text-[9px] uppercase font-semibold tracking-widest text-white/70 mb-1">Call Now</span>
-                  <span className="text-sm font-bold tracking-wide">Click to Call</span>
-                </div>
-              </a>
-
-              {/* WhatsApp */}
-              <a
-                href="https://wa.me/918099333754?text=Hello,%20I%20would%20like%20to%20book%20an%20Arya%20Samaj%20Marriage."
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex-1 flex items-center gap-4 px-6 py-3.5 bg-gradient-to-br from-[#176A3D] to-[#2A8E54] hover:from-[#2A8E54] hover:to-[#38ab69] text-white rounded-[22px] shadow-[0_10px_25px_rgba(23,106,61,0.25)] hover:shadow-[0_15px_30px_rgba(23,106,61,0.4)] border border-[#C78A2A]/20 transition-all duration-300 ease-in-out transform hover:-translate-y-1.5 hover:scale-[1.04] relative overflow-hidden"
-              >
-                {/* Glossy highlight top edge */}
-                <div className="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
-                {/* Glass reflections */}
-                <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent pointer-events-none"></div>
-
-                {/* White circular badge with gold outline */}
-                <div className="h-10 w-10 rounded-full bg-white flex items-center justify-center text-[#176A3D] border border-[#C78A2A]/30 shadow-[0_2px_6px_rgba(0,0,0,0.12)] shrink-0 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-[5deg]">
-                  <MessageSquare className="h-[18px] w-[18px] fill-current" />
-                </div>
-
-                <div className="flex flex-col items-start text-left leading-none">
-                  <span className="text-[9px] uppercase font-semibold tracking-widest text-white/70 mb-1">WhatsApp</span>
-                  <span className="text-sm font-bold tracking-wide">Chat with Us</span>
-                </div>
-              </a>
-
-              {/* Booking */}
-              <a
-                href="https://wa.me/918099333754?text=Hello,%20I%20would%20like%20to%20book%20a%20slot%20for%20an%20Arya%20Samaj%20Marriage."
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex-1 flex items-center gap-4 px-6 py-3.5 bg-gradient-to-br from-[#C78A2A] to-[#E0A93A] hover:from-[#E0A93A] hover:to-[#f0be54] text-white rounded-[22px] shadow-[0_10px_25px_rgba(199,138,42,0.25)] hover:shadow-[0_15px_30px_rgba(199,138,42,0.4)] border border-[#C78A2A]/20 transition-all duration-300 ease-in-out transform hover:-translate-y-1.5 hover:scale-[1.04] relative overflow-hidden"
-              >
-                {/* Glossy highlight top edge */}
-                <div className="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
-                {/* Glass reflections */}
-                <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent pointer-events-none"></div>
-
-                {/* White circular badge with gold outline */}
-                <div className="h-10 w-10 rounded-full bg-white flex items-center justify-center text-[#C78A2A] border border-[#C78A2A]/40 shadow-[0_2px_6px_rgba(0,0,0,0.12)] shrink-0 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-[5deg]">
-                  <Calendar className="h-[18px] w-[18px]" />
-                </div>
-
-                <div className="flex flex-col items-start text-left leading-none">
-                  <span className="text-[9px] uppercase font-semibold tracking-widest text-white/70 mb-1">Booking</span>
-                  <span className="text-sm font-bold tracking-wide">Enquire Now</span>
-                </div>
-              </a>
-
-            </div>
+            {/* CTA Buttons — client component for modal interactivity */}
+            <HeroActions />
           </div>
         </div>
       </section>

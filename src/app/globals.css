@@ -89,3 +89,23 @@ input:focus, select:focus, textarea:focus {
 .animate-float {
   animation: float 3s ease-in-out infinite;
 }
+
+/* Modal scroll lock */
+body.modal-open {
+  overflow: hidden;
+}
+
+/* iPhone safe area support for fixed bottom elements */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* Mobile keyboard: constrain modal to visual viewport */
+@media (max-width: 639px) {
+  .booking-modal-content {
+    max-height: var(--visual-viewport-height, 90vh);
+    transition: max-height 0.15s ease;
+  }
+}
