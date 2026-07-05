@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
+import type { Branch } from "@/types";
 import { db } from "@/lib/db";
 import { MapPin, Phone, MessageSquare, Clock } from "lucide-react";
 
@@ -39,7 +40,7 @@ export const metadata: Metadata = {
 export const revalidate = 0;
 
 export default async function ContactPage() {
-  const branches = await db.branch.findMany();
+  const branches: Branch[] = await db.branch.findMany();
 
   return (
     <div className="bg-[#FFF8F0] min-h-screen text-slate-800 pb-16">
