@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import type { Metadata } from "next";
+import type { Branch, Service } from "@/types";
 import { db } from "@/lib/db";
 import { getGalleryImages } from "@/lib/gallery";
 import HomeGalleryCarousel from "@/components/HomeGalleryCarousel";
@@ -54,8 +55,8 @@ export const revalidate = 0; // Make dynamic
 
 export default async function Home() {
   // Fetch branches and services from DB
-  const branches = await db.branch.findMany();
-  const services = await db.service.findMany();
+  const branches: Branch[] = await db.branch.findMany();
+  const services: Service[] = await db.service.findMany();
 
   // Read gallery images dynamically and filter for homepage (014-020)
   const allImages = getGalleryImages();
