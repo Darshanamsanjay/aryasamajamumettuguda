@@ -1,0 +1,131 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// For production:
+// 1. Change provider from "sqlite" to "postgresql"
+// 2. Set DATABASE_URL to your PostgreSQL connection string
+// 3. Run: npx prisma db push
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Branch {
+  id            String   @id @default(uuid())
+  slug          String   @unique
+  name          String
+  address       String
+  mapEmbedUrl   String
+  callPhone     String
+  whatsappPhone String
+  email         String
+  officeHours   String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Service {
+  id           String   @id @default(uuid())
+  slug         String   @unique
+  title        String
+  description  String
+  overview     String
+  eligibility  String // Split by newline
+  documents    String // Split by newline
+  benefits     String // Split by newline
+  steps        String // Split by newline
+  price        String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Slot {
+  id         String   @id @default(uuid())
+  branchSlug String
+  date       String   // Format YYYY-MM-DD
+  time       String   // e.g. "09:00 AM - 11:00 AM"
+  available  Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@unique([branchSlug, date, time])
+}
+
+model Booking {
+  id            String   @id @default(uuid())
+  bookingCode   String   @unique // Quick lookup code e.g. AS-10928
+  branchSlug    String
+  marriageType  String
+  date          String   // Format YYYY-MM-DD
+  timeSlot      String
+  brideName     String
+  groomName     String
+  phone         String
+  whatsapp      String
+  email         String
+  city          String
+  state         String
+  guestCount    Int
+  documentUrl   String?
+  specialNotes  String?
+  status        String   @default("PENDING") // PENDING, APPROVED, REJECTED, COMPLETED, CANCELLED
+  paymentStatus String   @default("PENDING") // PENDING, PAID, REFUNDED
+  paymentId     String?
+  invoiceId     String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Blog {
+  id             String   @id @default(uuid())
+  slug           String   @unique
+  title          String
+  content        String   // Markdown or HTML
+  image          String
+  author         String
+  date           String   // Format e.g., "June 30, 2026"
+  seoTitle       String?
+  seoDescription String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model Testimonial {
+  id             String   @id @default(uuid())
+  name           String
+  review         String
+  rating         Int
+  googleVerified Boolean  @default(true)
+  createdAt      DateTime @default(now())
+}
+
+model FAQ {
+  id        String   @id @default(uuid())
+  question  String
+  answer    String
+  category  String   @default("General") // General, Marriage, Documents, Booking
+  createdAt DateTime @default(now())
+}
+
+model Gallery {
+  id        String   @id @default(uuid())
+  title     String
+  imageUrl  String
+  category  String   @default("Weddings") // Weddings, Havan, Temple, Events
+  createdAt DateTime @default(now())
+}
+
+model ContactEnquiry {
+  id         String   @id @default(uuid())
+  name       String
+  email      String
+  phone      String
+  branchSlug String?
+  message    String
+  status     String   @default("PENDING") // PENDING, RESOLVED
+  createdAt  DateTime @default(now())
+}
