@@ -122,8 +122,22 @@ export default function Footer() {
         </div>
 
         {/* Copyright Bar */}
-        <div className="border-t border-slate-900 mt-12 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-          <p>&copy; {new Date().getFullYear()} Arya Samaj Mettuguda. All Rights Reserved.</p>
+        <div className="border-t border-slate-900 mt-12 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-sm text-slate-500">
+            © {new Date().getFullYear()} Arya Samaj. All rights reserved.
+          </p>
+
+          <p className="text-sm text-slate-500">
+            Designed by{" "}
+            <a
+              href="https://www.instagram.com/darshanam_sanjay/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-gold-500 hover:text-gold-400 transition-colors"
+            >
+              Sanjay Darshanam
+            </a>
+          </p>
         </div>
       </div>
     </footer>
