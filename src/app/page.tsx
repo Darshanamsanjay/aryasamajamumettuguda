@@ -1,14 +1,13 @@
 import React from "react";
 import Link from "next/link";
 import type { Metadata } from "next";
-import type { Branch, Service } from "@/types";
+import type { Service } from "@/types";
 import { db } from "@/lib/db";
 import { getGalleryImages } from "@/lib/gallery";
 import HomeGalleryCarousel from "@/components/HomeGalleryCarousel";
 import BookingForm from "@/components/BookingForm";
 import HeroActions from "@/components/HeroActions";
 import {
-  MapPin,
   Phone,
   MessageSquare,
   ArrowRight,
@@ -51,8 +50,7 @@ export const metadata: Metadata = {
 export const revalidate = 0; // Make dynamic
 
 export default async function Home() {
-  // Fetch branches and services from DB
-  const branches: Branch[] = await db.branch.findMany();
+  // Fetch services from DB
   const services: Service[] = await db.service.findMany();
 
   // Read gallery images dynamically and filter for homepage (014-020)
@@ -174,7 +172,27 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* 3. Services Preview */}
+      {/* 3. Image Gallery Carousel */}
+      <section className="py-20 bg-[#FFFDF9] border-b border-maroon-100/20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-12 flex flex-col gap-3">
+            <span className="font-serif text-gold-600 font-bold uppercase tracking-widest text-xs">Vedic Celebrations</span>
+            <h2 className="font-serif text-3xl sm:text-4xl font-bold text-maroon-700">
+              Temple Image Gallery
+            </h2>
+            <div className="h-0.5 w-20 bg-gold-500 mx-auto"></div>
+            <p className="text-slate-600 text-sm sm:text-base leading-relaxed mt-2">
+              Browse moments from the sacred Vedic rituals conducted at our Mettuguda and Nagaram temple sites.
+            </p>
+          </div>
+
+          <div className="max-w-6xl mx-auto">
+            <HomeGalleryCarousel images={homeImages} allImages={allImages} />
+          </div>
+        </div>
+      </section>
+
+      {/* 4. Marriage Services */}
       <section className="py-20 bg-white border-b border-maroon-100/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16 flex flex-col gap-3">
@@ -232,7 +250,7 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* 4. Documents Required Preview */}
+      {/* 5. Documents Required Preview */}
       <section className="py-20 bg-[#FFFDF9] border-b border-maroon-100/20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col gap-6 items-center">
           <span className="font-serif text-gold-600 font-bold uppercase tracking-widest text-xs">Legal Compliance</span>
@@ -272,140 +290,7 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* 5. Our Locations */}
-      <section className="py-20 bg-white border-b border-maroon-100/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-16 flex flex-col gap-3">
-            <span className="font-serif text-gold-600 font-bold uppercase tracking-widest text-xs">Official Temples</span>
-            <h2 className="font-serif text-3xl sm:text-4xl font-bold text-maroon-700">
-              Our Locations
-            </h2>
-            <div className="h-0.5 w-20 bg-gold-500 mx-auto"></div>
-            <p className="text-slate-600 text-sm sm:text-base leading-relaxed mt-2">
-              Visit either of our two consecrated branches in Hyderabad to coordinate your ceremony details.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-            {branches.map((branch) => {
-              const mapUrl = branch.slug === "mettuguda"
-                ? "https://maps.app.goo.gl/sTVVuqM5NwoxnUs8A?g_st=iw"
-                : "https://maps.app.goo.gl/TngfU1aPXELkbGMp6";
-
-              return (
-                <div
-                  key={branch.id}
-                  className="bg-[#FFF8F0] border border-[#D4AF37]/25 rounded-[18px] p-8 shadow-[0_10px_30px_rgba(0,0,0,0.08)] flex flex-col justify-between min-h-[420px] transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:border-[#D4AF37]/50 relative cursor-pointer group"
-                >
-                  {/* Card Link Overlay */}
-                  <a
-                    href={mapUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="absolute inset-0 z-0 cursor-pointer"
-                    aria-label={`Open ${branch.name} on Google Maps`}
-                  />
-
-                  {/* Card Content */}
-                  <div className="flex flex-col gap-6 relative z-10 pointer-events-none">
-                    {/* Branch Name */}
-                    <div>
-                      <h3 className="font-serif text-[26px] md:text-[34px] font-bold text-[#6B1020] leading-tight">
-                        {branch.name}
-                      </h3>
-                      <div className="h-0.5 w-16 bg-[#C78A2A]/40 mt-3"></div>
-                    </div>
-
-                    {/* Information Blocks */}
-                    <div className="flex flex-col gap-4 text-[#3F3F46] font-sans">
-                      {/* Address */}
-                      <div className="flex gap-3.5 items-start">
-                        <MapPin className="h-5 w-5 text-[#B8860B] shrink-0 mt-0.5" />
-                        <div className="flex flex-col gap-1">
-                          <span className="text-[10px] uppercase tracking-wider font-medium text-[#B8860B]">Address</span>
-                          <span className="text-base md:text-[17px] leading-relaxed">{branch.address}</span>
-                        </div>
-                      </div>
-
-                      {/* Phone */}
-                      <div className="flex gap-3.5 items-start">
-                        <Phone className="h-5 w-5 text-[#B8860B] shrink-0 mt-0.5" />
-                        <div className="flex flex-col gap-1">
-                          <span className="text-[10px] uppercase tracking-wider font-medium text-[#B8860B]">Phone Number</span>
-                          <a href="tel:+918099333754" className="font-bold text-[#6B1020] text-lg md:text-xl hover:underline relative z-20 pointer-events-auto">
-                            +91 8099333754
-                          </a>
-                        </div>
-                      </div>
-
-                      {/* Office Timings */}
-                      <div className="flex gap-3.5 items-start">
-                        <Clock className="h-5 w-5 text-[#B8860B] shrink-0 mt-0.5" />
-                        <div className="flex flex-col gap-1">
-                          <span className="text-[10px] uppercase tracking-wider font-medium text-[#B8860B]">Office Timings</span>
-                          <span className="text-base md:text-[17px] font-medium">{branch.officeHours}</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Action Buttons: 3 equal-width rounded pill shape buttons */}
-                  <div className="h-px bg-[#D4AF37]/15 mt-6"></div>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 mt-5 relative z-20">
-                    <a
-                      href="tel:+918099333754"
-                      className="flex items-center justify-center gap-2 h-11 bg-gradient-to-r from-[#6B1020] to-[#8C1527] hover:from-[#8C1527] hover:to-[#A31D33] text-white font-bold text-xs rounded-full shadow-sm active:scale-95 transition-all w-full text-center"
-                    >
-                      <Phone className="h-3.5 w-3.5" />
-                      <span>Call Now</span>
-                    </a>
-                    <a
-                      href="https://wa.me/918099333754?text=Hello,%20I%20would%20like%20to%20book%20an%20Arya%20Samaj%20Marriage."
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-2 h-11 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-bold text-xs rounded-full shadow-sm active:scale-95 transition-all w-full text-center"
-                    >
-                      <MessageSquare className="h-3.5 w-3.5 fill-current" />
-                      <span>WhatsApp</span>
-                    </a>
-                    <a
-                      href={mapUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-2 h-11 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-bold text-xs rounded-full shadow-sm active:scale-95 transition-all w-full text-center"
-                    >
-                      <MapPin className="h-3.5 w-3.5 text-white" />
-                      <span>View on Google Maps</span>
-                    </a>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* 6. Image Gallery Carousel */}
-      <section className="py-20 bg-[#FFFDF9] border-b border-maroon-100/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-12 flex flex-col gap-3">
-            <span className="font-serif text-gold-600 font-bold uppercase tracking-widest text-xs">Vedic Celebrations</span>
-            <h2 className="font-serif text-3xl sm:text-4xl font-bold text-maroon-700">
-              Temple Image Gallery
-            </h2>
-            <div className="h-0.5 w-20 bg-gold-500 mx-auto"></div>
-            <p className="text-slate-600 text-sm sm:text-base leading-relaxed mt-2">
-              Browse moments from the sacred Vedic rituals conducted at our Mettuguda and Nagaram temple sites.
-            </p>
-          </div>
-
-          <div className="max-w-6xl mx-auto">
-            <HomeGalleryCarousel images={homeImages} allImages={allImages} />
-          </div>
-        </div>
-      </section>
-
-      {/* 6.5. Slot Booking Form Section */}
+      {/* 6. Slot Booking Form Section */}
       <section className="py-20 bg-[#FFF8F0] border-b border-maroon-100/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
