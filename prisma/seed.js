@@ -1,13 +1,6 @@
-const { PrismaClient } = require('@prisma/client');
-const { PrismaBetterSqlite3 } = require('@prisma/adapter-better-sqlite3');
-const path = require('path');
+const { PrismaClient } = require("@prisma/client");
 
-// Target the root directory's dev.db
-const dbPath = path.join(__dirname, '..', 'dev.db');
-const url = `file:${dbPath}`;
-const adapter = new PrismaBetterSqlite3({ url });
-const prisma = new PrismaClient({ adapter });
-
+const prisma = new PrismaClient();
 async function main() {
   console.log('Seeding database...');
 
