@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
+import type { Service } from "@/types";
 import { db } from "@/lib/db";
 import { 
   ArrowRight, 
@@ -50,7 +51,7 @@ export const metadata: Metadata = {
 export const revalidate = 0;
 
 export default async function ServicesPage() {
-  const services = await db.service.findMany({
+  const services: Service[] = await db.service.findMany({
     orderBy: {
       title: "asc",
     },
