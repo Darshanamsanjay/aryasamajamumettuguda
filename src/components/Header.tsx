@@ -6,6 +6,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X, Phone, MessageSquare } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { getWhatsAppUrl } from "@/constants/business";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -155,7 +156,7 @@ export default function Header() {
                   <span>Call +91 8099333754</span>
                 </a>
                 <a
-                  href="https://wa.me/918099333754?text=Hello,%20I%20would%20like%20to%20book%20an%20Arya%20Samaj%20Marriage."
+                  href={getWhatsAppUrl("Hello, I would like to book an Arya Samaj Marriage.")}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 py-3.5 bg-gradient-to-r from-emerald-600 to-emerald-700 text-white rounded-xl font-bold shadow-md text-center hover:from-emerald-700 hover:to-emerald-800 transition-all"

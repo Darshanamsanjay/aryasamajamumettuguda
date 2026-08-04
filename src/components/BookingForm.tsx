@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { Calendar, User, Phone, MessageSquare, AlertCircle, Clock, Sparkles } from "lucide-react";
+import { getWhatsAppUrl } from "@/constants/business";
 
 export default function BookingForm() {
   const [formData, setFormData] = useState({
@@ -110,7 +111,7 @@ Please confirm the available slot.
 
 Thank you.`;
 
-    const waLink = `https://wa.me/918099333754?text=${encodeURIComponent(rawMessage)}`;
+    const waLink = getWhatsAppUrl(rawMessage);
     window.open(waLink, "_blank", "noopener,noreferrer");
   };
 

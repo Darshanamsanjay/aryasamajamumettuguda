@@ -14,6 +14,7 @@ import {
   ListOrdered,
   BookOpen
 } from "lucide-react";
+import { getWhatsAppUrl } from "@/constants/business";
 
 interface ServiceProps {
   params: Promise<{ slug: string }>;
@@ -270,7 +271,7 @@ export default async function ServiceDetailPage({ params }: ServiceProps) {
 
                 {/* WhatsApp Inquiry */}
                 <a
-                  href={`https://wa.me/918099333754?text=Hello,%20I%20would%20like%20to%20book%20an%20Arya%20Samaj%20Marriage%20for%20${encodeURIComponent(service.title)}.`}
+                  href={getWhatsAppUrl(`Hello, I would like to book an Arya Samaj Marriage for ${service.title}.`)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group w-full flex items-center justify-center gap-3 py-3 bg-gradient-to-br from-[#176A3D] to-[#2A8E54] hover:from-[#2A8E54] hover:to-[#38ab69] text-white rounded-full text-xs font-bold shadow-sm transition-all duration-200 active:scale-95 border border-[#C78A2A]/15 shrink-0"

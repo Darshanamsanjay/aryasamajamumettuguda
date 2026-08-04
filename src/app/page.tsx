@@ -8,13 +8,11 @@ import HomeGalleryCarousel from "@/components/HomeGalleryCarousel";
 import BookingForm from "@/components/BookingForm";
 import HeroActions from "@/components/HeroActions";
 import {
-  Phone,
-  MessageSquare,
   ArrowRight,
   FileText,
-  Clock,
   Flower2,
 } from "lucide-react";
+import { getWhatsAppUrl } from "@/constants/business";
 
 const siteUrl = "https://www.aryasamajamumettuguda.com";
 
@@ -336,7 +334,7 @@ export default async function Home() {
                 Call Helpline: +91 8099333754
               </a>
               <a
-                href="https://wa.me/918099333754?text=Hello,%20I%20would%20like%20to%20book%20an%20Arya%20Samaj%20Marriage."
+                href={getWhatsAppUrl("Hello, I would like to book an Arya Samaj Marriage.")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-8 py-3.5 border border-slate-400 hover:border-white text-white rounded-full font-bold text-base transition-colors"

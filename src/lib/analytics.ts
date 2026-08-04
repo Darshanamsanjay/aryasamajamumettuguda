@@ -6,8 +6,6 @@
  * and ensure the GA4 snippet is loaded in layout.tsx.
  */
 
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
 declare global {
   interface Window {
     gtag?: (...args: unknown[]) => void;

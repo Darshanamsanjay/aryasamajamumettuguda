@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
 import { UserCheck, ShieldAlert, Users, CheckCircle2, Phone, MessageSquare } from "lucide-react";
+import { getWhatsAppUrl } from "@/constants/business";
 
 const siteUrl = "https://www.aryasamajamumettuguda.com";
 
@@ -276,7 +277,7 @@ export default function DocumentsRequired() {
 
             {/* WhatsApp */}
             <a
-              href="https://wa.me/918099333754?text=Hello,%20I%20would%20like%20to%20inquire%20about%20documents%20required."
+              href={getWhatsAppUrl("Hello, I would like to inquire about documents required.")}
               target="_blank"
               rel="noopener noreferrer"
               className="group flex-1 flex items-center justify-center gap-3 px-5 py-3 bg-gradient-to-br from-[#176A3D] to-[#2A8E54] hover:from-[#2A8E54] hover:to-[#38ab69] text-white rounded-full text-xs font-bold shadow-md transition-all duration-200 active:scale-95 border border-[#C78A2A]/20 shrink-0"

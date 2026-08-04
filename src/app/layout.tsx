@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import StickyContactButtons from "@/components/StickyContactButtons";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -78,10 +81,6 @@ export const metadata: Metadata = {
   },
   manifest: "/site.webmanifest",
 };
-
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import StickyContactButtons from "@/components/StickyContactButtons";
 
 // JSON-LD Structured Data — LocalBusiness with two branch locations
 const jsonLd = {

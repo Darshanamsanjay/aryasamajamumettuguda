@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import dynamic from "next/dynamic";
 import { Phone, MessageSquare, Calendar } from "lucide-react";
-import { WHATSAPP_NUMBER, CALL_NUMBER } from "@/constants/business";
+import { CALL_NUMBER, getWhatsAppUrl } from "@/constants/business";
 
 /* -------------------------------------------------------------------------- */
 /*                        Lazy-loaded modal (bundle split)                    */
@@ -20,7 +20,7 @@ const BookingModal = dynamic(() => import("./BookingModal"), {
 export default function HeroActions() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hello, I would like to book an Arya Samaj Marriage.")}`;
+  const whatsappUrl = getWhatsAppUrl("Hello, I would like to book an Arya Samaj Marriage.");
 
   return (
     <>

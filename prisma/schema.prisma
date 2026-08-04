@@ -1,10 +1,5 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// For production:
-// 1. Change provider from "sqlite" to "postgresql"
-// 2. Set DATABASE_URL to your PostgreSQL connection string
-// 3. Run: npx prisma db push
+// This is your Prisma schema file.
+// Production database is configured for PostgreSQL (Supabase).
 
 generator client {
   provider = "prisma-client-js"

@@ -12,6 +12,19 @@
 export const WHATSAPP_NUMBER =
   process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "918099333754";
 
+/** Default WhatsApp message as plain text */
+export const DEFAULT_WHATSAPP_MESSAGE =
+  "Hello, I would like to book an Arya Samaj Marriage.";
+
+/** Helper to generate WhatsApp URL with plain text message */
+export function getWhatsAppUrl(
+  message: string = DEFAULT_WHATSAPP_MESSAGE,
+  phone: string = WHATSAPP_NUMBER
+): string {
+  return `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+}
+
+
 /** Callable phone number — international format */
 export const CALL_NUMBER =
   process.env.NEXT_PUBLIC_CALL_NUMBER ?? "+918099333754";

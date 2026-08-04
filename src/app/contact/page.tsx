@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import type { Branch } from "@/types";
 import { db } from "@/lib/db";
 import { MapPin, Phone, MessageSquare, Clock } from "lucide-react";
+import { getWhatsAppUrl } from "@/constants/business";
 
 const siteUrl = "https://www.aryasamajamumettuguda.com";
 
@@ -174,7 +175,7 @@ export default async function ContactPage() {
                     <span>Call Now</span>
                   </a>
                   <a
-                    href="https://wa.me/918099333754?text=Hello,%20I%20would%20like%20to%20book%20an%20Arya%20Samaj%20Marriage."
+                    href={getWhatsAppUrl("Hello, I would like to book an Arya Samaj Marriage.")}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-center gap-2 h-11 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-bold text-xs rounded-full shadow-sm active:scale-95 transition-all w-full text-center"

@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
 import type { BookingFormData } from "@/types/booking";
 import { EMPTY_FORM } from "@/types/booking";
-import { WHATSAPP_NUMBER } from "@/constants/business";
+import { getWhatsAppUrl } from "@/constants/business";
 import { getAvailableTimeSlots } from "@/constants/timeSlots";
 import { trackEvent, EVENTS } from "@/lib/analytics";
 import BookingFormFields from "./BookingFormFields";
@@ -212,13 +212,14 @@ export default function BookingModal({
 
   /* ── Mount lifecycle ─────────────────────────────────────────────────── */
   useEffect(() => {
-    if (!isOpen) {
-      // Reset phase for next open
+    if (!isOpen) return;
+
+    // Reset phase for open asynchronously to avoid cascading renders
+    queueMicrotask(() => {
       setPhase("loading");
       setErrors({});
       setIsSubmitting(false);
-      return;
-    }
+    });
 
     // Remember which element triggered the modal
     triggerRef.current = document.activeElement as HTMLElement;
@@ -370,7 +371,7 @@ export default function BookingModal({
       // Show spinner for 500ms before redirecting
       setTimeout(() => {
         const message = buildWhatsAppMessage(formData);
-        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+        const url = getWhatsAppUrl(message);
 
         trackEvent(EVENTS.WHATSAPP_OPENED, {
           date: formData.preferredDate,
