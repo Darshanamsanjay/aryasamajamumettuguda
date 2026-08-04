@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { Calendar, User, Phone, MessageSquare, AlertCircle, Clock, Sparkles } from "lucide-react";
 import { getWhatsAppUrl } from "@/constants/business";
+import { trackGoogleAdsConversion } from "@/lib/analytics";
 
 export default function BookingForm() {
   const [formData, setFormData] = useState({
@@ -112,7 +113,9 @@ Please confirm the available slot.
 Thank you.`;
 
     const waLink = getWhatsAppUrl(rawMessage);
-    window.open(waLink, "_blank", "noopener,noreferrer");
+    trackGoogleAdsConversion(() => {
+      window.open(waLink, "_blank", "noopener,noreferrer");
+    });
   };
 
   const inputClass = (field: string) =>

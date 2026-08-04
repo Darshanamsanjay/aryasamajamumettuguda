@@ -7,7 +7,7 @@ import type { BookingFormData } from "@/types/booking";
 import { EMPTY_FORM } from "@/types/booking";
 import { getWhatsAppUrl } from "@/constants/business";
 import { getAvailableTimeSlots } from "@/constants/timeSlots";
-import { trackEvent, EVENTS } from "@/lib/analytics";
+import { trackEvent, EVENTS, trackGoogleAdsConversion } from "@/lib/analytics";
 import BookingFormFields from "./BookingFormFields";
 
 /* -------------------------------------------------------------------------- */
@@ -378,18 +378,20 @@ export default function BookingModal({
           time: formData.preferredTime,
         });
 
-        window.open(url, "_blank", "noopener,noreferrer");
+        trackGoogleAdsConversion(() => {
+          window.open(url, "_blank", "noopener,noreferrer");
 
-        // Clear saved draft
-        try {
-          sessionStorage.removeItem(STORAGE_KEY);
-        } catch {
-          // ignore
-        }
+          // Clear saved draft
+          try {
+            sessionStorage.removeItem(STORAGE_KEY);
+          } catch {
+            // ignore
+          }
 
-        setFormData(EMPTY_FORM);
-        setIsSubmitting(false);
-        onClose();
+          setFormData(EMPTY_FORM);
+          setIsSubmitting(false);
+          onClose();
+        });
       }, 500);
     },
     [validateForm, formData, onClose],
