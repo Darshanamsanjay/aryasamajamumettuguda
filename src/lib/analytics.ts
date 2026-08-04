@@ -13,7 +13,7 @@ declare global {
   }
 }
 
-export const GOOGLE_ADS_CONVERSION_ID = "AW-17983637172/N5wXCPy-294bEOCo388c";
+export const GOOGLE_ADS_CONVERSION_ID = "AW-10829125096/B4sACKm0me8YEOir3aso";
 
 export function trackEvent(name: string, params?: Record<string, string>) {
   if (typeof window === "undefined") return;
